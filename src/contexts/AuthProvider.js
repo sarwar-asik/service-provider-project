@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import app from "../firebase/firebase.config";
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -36,8 +37,22 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
+//   for log out 
 
-  const userInfo = { login ,user,loader, createUser};
+
+const logout = () => {
+    return signOut(auth)
+      .then(() => {
+        alert("logout");
+        toast('log out ')
+      })
+      .catch((error) => {
+        console.log(error.message, "from log out");
+      });
+  };
+
+
+  const userInfo = { login ,user,loader, createUser,logout};
   return (
     <div>
       <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>
