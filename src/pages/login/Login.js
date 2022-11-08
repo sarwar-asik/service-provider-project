@@ -1,26 +1,24 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { toast } from 'react-toastify';
-import { AuthContext } from '../../contexts/AuthProvider';
-
-
-
-
+import { toast } from "react-toastify";
+import { AuthContext } from "../../contexts/AuthProvider";
+import useTitle from "../../myhooks/useTitle";
 
 const Login = () => {
-    
-    const [show, setshow] = useState(false);
+  useTitle("Log In ");
+
+  const [show, setshow] = useState(false);
   const [error, setError] = useState("");
 
-const {login,loader,setloader} = useContext(AuthContext)
+  const { login, loader, setloader } = useContext(AuthContext);
 
   const handleShow = () => {
     return setshow(!show);
   };
 
-const logInUser =event=>{
+  const logInUser = (event) => {
     event.preventDefault();
     event.preventDefault();
     const form = event.target;
@@ -29,40 +27,37 @@ const logInUser =event=>{
     console.log(email, password);
 
     login(email, password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
-      toast(user);
-      setError("");
-      form.reset();
-      console.log(user.email);
-      // added a token //
-      setloader(false)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        toast(user);
+        setError("");
+        form.reset();
+        console.log(user.email);
+        // added a token //
+        setloader(false);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage);
+      });
 
-    
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      setError(errorMessage);
-    });
-
-  setError("");
-
-}
-    return (
-        <div
+    setError("");
+  };
+  return (
+    <div
       className=" mx-auto h-100 bg-light py-5 my-auto px-3 shadow"
       style={{ maxWidth: "60%" }}
     >
-        {loader &&
-         <div class="text-center">
-         <div class="spinner-border" role="status">
-           <span class="visually-hidden">Loading...</span>
-         </div>
-       </div>
-        }
-       
+      {loader && (
+        <div class="text-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
+
       <Form onSubmit={logInUser}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
@@ -92,7 +87,7 @@ const logInUser =event=>{
         </Button>
       </Form>
     </div>
-    );
+  );
 };
 
 export default Login;

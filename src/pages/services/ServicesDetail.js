@@ -2,29 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../contexts/AuthProvider";
+import useTitle from "../../myhooks/useTitle";
 
 const ServicesDetail = () => {
+  useTitle('Service Detail')
   const service = useLoaderData();
   console.log(service.reviews);
   const { user } = useContext(AuthContext);
-
-
-
-//   const [services,setServices] = useState(service)
-
-// const [change,setchange] = useState(false)
-
-  
-// useEffect(()=>{
-
-//   fetch(`https://sh-tourist-server.vercel.app/services/${service._id}`)
-//   .then(res=>res.json())
-//   .then(data=>{
-//     console.log(data);
-//     setServices(service)
-//   })
-// }
-// ,[])
 
   const submitReview = (event) => {
     event.preventDefault();

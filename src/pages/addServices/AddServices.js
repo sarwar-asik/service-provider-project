@@ -3,8 +3,10 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../contexts/AuthProvider";
+import useTitle from "../../myhooks/useTitle";
 
 const AddServices = () => {
+  useTitle('Add Services')
   const [loader, setloader] = useState(false);
   const { user } = useContext(AuthContext);
 

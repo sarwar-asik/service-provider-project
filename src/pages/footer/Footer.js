@@ -1,7 +1,9 @@
 import React from "react";
 import { FaFacebook, FaTwitter } from "react-icons/fa";
+import useTitle from "../../myhooks/useTitle";
 
 const Footer = () => {
+  useTitle('Footer')
 
     
   return (

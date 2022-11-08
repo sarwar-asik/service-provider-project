@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
+import useTitle from "../../myhooks/useTitle";
 import ServiceCard from "../services/ServiceCard";
 import Services from "../services/Services";
 import Sliders from "./Sliders";
 
 const Home = () => {
+
+  useTitle('Home')
   const [services, setServices] = useState([]);
 const [loader,setloader] =useState(true);
 

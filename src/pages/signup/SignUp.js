@@ -6,10 +6,12 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { getAuth, updateProfile } from "firebase/auth";
 import { toast } from "react-toastify";
 import app from "../../firebase/firebase.config";
+import useTitle from "../../myhooks/useTitle";
 
 const auth = getAuth(app);
 
 const SignUp = () => {
+  useTitle('Sign Up')
   const [error, setError] = useState("");
 
   const { createUser, loader, setloader } = useContext(AuthContext);
