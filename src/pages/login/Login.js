@@ -10,10 +10,11 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 
 const Login = () => {
+    
     const [show, setshow] = useState(false);
   const [error, setError] = useState("");
 
-const {login} = useContext(AuthContext)
+const {login,loader,setloader} = useContext(AuthContext)
 
   const handleShow = () => {
     return setshow(!show);
@@ -36,6 +37,7 @@ const logInUser =event=>{
       form.reset();
       console.log(user.email);
       // added a token //
+      setloader(false)
 
     
     })
@@ -53,6 +55,14 @@ const logInUser =event=>{
       className=" mx-auto h-100 bg-light py-5 px-3 shadow"
       style={{ maxWidth: "70%" }}
     >
+        {loader &&
+         <div class="text-center">
+         <div class="spinner-border" role="status">
+           <span class="visually-hidden">Loading...</span>
+         </div>
+       </div>
+        }
+       
       <Form onSubmit={logInUser}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>

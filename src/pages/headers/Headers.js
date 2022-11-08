@@ -24,7 +24,7 @@ const Headers = () => {
             <Nav>
               {user?.uid ? (
                 <>
-                  <Link className="btn btn-outline-primary my-1 mx-1" to={"/"}>
+                  <Link className="btn btn-outline-primary my-1 mx-1" to={"/review"}>
                     My Review{" "}
                   </Link>
                   <Link className="btn btn-outline-primary my-1 mx-1" to={"/addservices"}>
@@ -37,6 +37,7 @@ const Headers = () => {
                   >
                     Log Out{" "}
                   </Link>
+
                 </>
               ) : (
                 <>
@@ -55,9 +56,8 @@ const Headers = () => {
                 </>
               )}
 
-              <Link
+              <Link to={'/blogs'}
                 className="btn btn-outline-secondary my-1 mx-1"
-                to={"/blogs"}
               >
                 Blogs
               </Link>

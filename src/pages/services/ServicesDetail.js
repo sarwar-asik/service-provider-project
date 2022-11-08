@@ -16,7 +16,7 @@ const ServicesDetail = () => {
           className="mx-auto"
           class="card-img-top"
           alt="..."
-          style={{ maxHeight: "250px", maxWidth: "90%" }}
+          style={{ maxHeight: "250px", maxWidth: "100%" }}
         />
         <div class="card-body">
           <div className="">

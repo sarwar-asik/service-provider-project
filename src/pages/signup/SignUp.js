@@ -13,7 +13,7 @@ const SignUp = () => {
   const [check, setcheck] = useState(true);
   const [error, setError] = useState("");
 
-  const { createUser } = useContext(AuthContext);
+  const { createUser,loader,setloader } = useContext(AuthContext);
   console.log(createUser);
 
   const [show, setshow] = useState(false);
@@ -43,7 +43,9 @@ const SignUp = () => {
           photoURL: "shorturl.at/krJMU",
         })
           .then(() => {
-            // toast('added name')
+            toast('added name')
+            setloader(false)
+
           })
           .catch((error) => {
             console.log(error.message);
@@ -64,6 +66,13 @@ const SignUp = () => {
       className=" mx-auto h-100 bg-light py-5 px-3 shadow"
       style={{ maxWidth: "70%" }}
     >
+       {loader &&
+         <div class="text-center">
+         <div class="spinner-border" role="status">
+           <span class="visually-hidden">Loading...</span>
+         </div>
+       </div>
+        }
       <Form onSubmit={signInUser}>
         <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Your Name</Form.Label>

@@ -52,7 +52,7 @@ const logout = () => {
   };
 
 
-  const userInfo = { login ,user,loader, createUser,logout};
+  const userInfo = { login ,user,loader,setloader, createUser,logout};
   return (
     <div>
       <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>
