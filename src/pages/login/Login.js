@@ -52,8 +52,8 @@ const logInUser =event=>{
 }
     return (
         <div
-      className=" mx-auto h-100 bg-light py-5 px-3 shadow"
-      style={{ maxWidth: "70%" }}
+      className=" mx-auto h-100 bg-light py-5 my-auto px-3 shadow"
+      style={{ maxWidth: "60%" }}
     >
         {loader &&
          <div class="text-center">

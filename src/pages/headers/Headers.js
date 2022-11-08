@@ -14,20 +14,29 @@ const Headers = () => {
       <Navbar collapseOnSelect expand="lg" bg="" variant="">
         <Container>
           <Navbar.Brand href="#home" className=" ">
-            <Link to={'/'} className="btn fw-bold fs-1 text-muted">SH PERSONAL TRAVEL</Link>
+            <Link to={"/"} className="btn fw-bold fs-1 text-muted">
+              SH PERSONAL TRAVEL
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-            
-            </Nav>
+            <Nav className="me-auto"></Nav>
             <Nav>
+              <Link className="btn btn-secondary my-1 mx-1" to={"/"}>
+                Home
+              </Link>
               {user?.uid ? (
                 <>
-                  <Link className="btn btn-outline-primary my-1 mx-1" to={"/review"}>
+                  <Link
+                    className="btn btn-outline-primary my-1 mx-1"
+                    to={"/review"}
+                  >
                     My Review{" "}
                   </Link>
-                  <Link className="btn btn-outline-primary my-1 mx-1" to={"/addservices"}>
+                  <Link
+                    className="btn btn-outline-primary my-1 mx-1"
+                    to={"/addservices"}
+                  >
                     Add Service{" "}
                   </Link>
                   <Link
@@ -37,7 +46,6 @@ const Headers = () => {
                   >
                     Log Out{" "}
                   </Link>
-
                 </>
               ) : (
                 <>
@@ -56,7 +64,8 @@ const Headers = () => {
                 </>
               )}
 
-              <Link to={'/blogs'}
+              <Link
+                to={"/blogs"}
                 className="btn btn-outline-secondary my-1 mx-1"
               >
                 Blogs

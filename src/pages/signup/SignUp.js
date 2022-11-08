@@ -10,11 +10,9 @@ import app from "../../firebase/firebase.config";
 const auth = getAuth(app);
 
 const SignUp = () => {
-  const [check, setcheck] = useState(true);
   const [error, setError] = useState("");
 
   const { createUser,loader,setloader } = useContext(AuthContext);
-  console.log(createUser);
 
   const [show, setshow] = useState(false);
 
@@ -63,8 +61,8 @@ const SignUp = () => {
 
   return (
     <div
-      className=" mx-auto h-100 bg-light py-5 px-3 shadow"
-      style={{ maxWidth: "70%" }}
+      className=" mx-auto h-100 bg-light my-5 py-5 px-3 shadow"
+      style={{ maxWidth: "50%" }}
     >
        {loader &&
          <div class="text-center">

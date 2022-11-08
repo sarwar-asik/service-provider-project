@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const AddServices = () => {
-  const [error, setError] = useState("");
+  const [loader, setloader] = useState(false);
+  const { user } = useContext(AuthContext);
 
+  console.log(user);
   const addServices = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -22,12 +25,21 @@ const AddServices = () => {
       rating,
       price,
       detail,
-      time : new Date().toLocaleTimeString(),
-      reviews: [{ review ,reviewTime:new Date().toLocaleTimeString()}],
+      time: new Date().toLocaleTimeString(),
+      reviews: [
+        {
+          review: review,
+          email: user.email,
+          name: user.displayName,
+          photo: user.photoURL,
+          reviewTime: new Date().toLocaleTimeString(),
+        },
+      ],
     };
     console.log(services);
+    setloader(true);
 
-    fetch("http://localhost:5000/addServices", {
+    fetch("https://sh-tourist-server.vercel.app/addServices", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -37,6 +49,7 @@ const AddServices = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        setloader(false);
         toast("Services Added");
         form.reset();
       });
@@ -46,6 +59,13 @@ const AddServices = () => {
       className=" mx-auto h-100 bg-light py-5 px-3 shadow"
       style={{ maxWidth: "70%" }}
     >
+      {loader && (
+        <div class="text-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
       <Form onSubmit={addServices}>
         <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Services Name </Form.Label>

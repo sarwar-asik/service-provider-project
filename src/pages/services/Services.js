@@ -4,8 +4,8 @@ import ServiceCard from "./ServiceCard";
 
 const Services = () => {
   const [services, setServices] = useState([]);
-  const {loader,setloader} =useContext(AuthContext)
 
+const [loader,setloader] =useState(true);
 
   useEffect(() => {
     fetch("https://sh-tourist-server.vercel.app/services")
@@ -16,10 +16,12 @@ const Services = () => {
         
       });
 
+
   }, []);
 
+
   return (
-    <div className="my-3 mx-auto" style={{ maxWidth: "90%" }}>
+    <div className="my-3 mx-auto" style={{ maxWidth: "80%" }}>
          {loader &&
          <div class="text-center">
          <div class="spinner-border" role="status">
@@ -27,7 +29,7 @@ const Services = () => {
          </div>
        </div>
         }
-      <h1>Services {services.length}</h1>
+      <h1 className="text-center bg-light shadow  my-3 py-3 text-muted fw-bold">Total Services {services.length}</h1>
       <div class="card-group row ">
         {services.map((service) => {
           return (

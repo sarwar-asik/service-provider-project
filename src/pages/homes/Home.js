@@ -7,7 +7,7 @@ import Sliders from "./Sliders";
 
 const Home = () => {
   const [services, setServices] = useState([]);
-  const { loader,setloader } = useContext(AuthContext);
+const [loader,setloader] =useState(true);
 
   useEffect(() => {
     fetch("https://sh-tourist-server.vercel.app/serviceslimit")
