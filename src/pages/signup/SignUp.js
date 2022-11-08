@@ -12,7 +12,7 @@ const auth = getAuth(app);
 const SignUp = () => {
   const [error, setError] = useState("");
 
-  const { createUser,loader,setloader } = useContext(AuthContext);
+  const { createUser, loader, setloader } = useContext(AuthContext);
 
   const [show, setshow] = useState(false);
 
@@ -26,6 +26,7 @@ const SignUp = () => {
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
+    const img = form.img.value;
     console.log(name, email, password);
 
     createUser(email, password)
@@ -38,19 +39,17 @@ const SignUp = () => {
 
         updateProfile(auth.currentUser, {
           displayName: name,
-          photoURL: "shorturl.at/krJMU",
+          photoURL: img,
         })
           .then(() => {
-            toast('added name')
-            setloader(false)
-
+            toast("added name");
+            setloader(false);
           })
           .catch((error) => {
             console.log(error.message);
           });
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         setError(errorMessage);
 
@@ -64,22 +63,31 @@ const SignUp = () => {
       className=" mx-auto h-100 bg-light my-5 py-5 px-3 shadow"
       style={{ maxWidth: "50%" }}
     >
-       {loader &&
-         <div class="text-center">
-         <div class="spinner-border" role="status">
-           <span class="visually-hidden">Loading...</span>
-         </div>
-       </div>
-        }
+      {loader && (
+        <div class="text-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
       <Form onSubmit={signInUser}>
         <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Your Name</Form.Label>
           <Form.Control type="text" name="name" placeholder="Enter Name" />
         </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicImg">
+          <Form.Label>Paste Your Photo</Form.Label>
+          <Form.Control type="text" name="img" placeholder="paste url" />
+        </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" name="email" placeholder="Enter email" />
+          <Form.Control
+            type="email"
+            name="email"
+            placeholder="Enter email"
+            required
+          />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -93,6 +101,7 @@ const SignUp = () => {
             type={show ? "text" : "password"}
             name="password"
             placeholder="Password"
+            required
           />
         </Form.Group>
 
