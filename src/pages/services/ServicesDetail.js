@@ -5,10 +5,23 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import useTitle from "../../myhooks/useTitle";
 
 const ServicesDetail = () => {
-  useTitle('Service Detail')
+  useTitle("Service Detail");
   const service = useLoaderData();
-  console.log(service.reviews);
   const { user } = useContext(AuthContext);
+
+const [reviews,setReviews] = useState([])
+
+useEffect(()=>{
+  fetch(`http://localhost:5000/reviews/${service._id}`)
+  .then(res=>res.json())
+  .then(data=>{
+    setReviews(data)
+  })
+},[])
+
+const sortsReview =reviews.sort((a,b)=>new Date(b.reviewTime)-new Date(a.reviewTime))
+
+
 
   const submitReview = (event) => {
     event.preventDefault();
@@ -22,26 +35,26 @@ const ServicesDetail = () => {
       email: user.email,
       name: user.displayName,
       photo: user.photoURL,
-      reviewTime: new Date().toLocaleTimeString(),
+      reviewTime: new Date().toLocaleString(),
     };
 
-    
-    // console.log(reviews);
-    fetch(`http://localhost:5000/services/${service._id}`, {
-      method: "PUT",
+    // /  ///
+
+    fetch("http://localhost:5000/addreviews", {
+      method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({service,reviews}),
+      body: JSON.stringify(reviews),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        toast('Thanks for Review')
+        toast('update comment')
         form.reset()
 
-      });
 
+      });
 
 
   };
@@ -75,14 +88,18 @@ const ServicesDetail = () => {
 
       <div className="card mx-auto my-3 w-50 shadow">
         <h1> Total Review </h1>
-        {service.reviews.map((rev) => {
+        {sortsReview.map((rev) => {
           return (
             <div class="card mb-3">
               <div class="row g-0">
                 <div class="col-md-4">
                   <img
                     className="img-fluid rounded-pill"
-                    src={rev.photo?rev.photo: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"}
+                    src={
+                      rev.photo
+                        ? rev.photo
+                        : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+                    }
                     alt=""
                   />
                 </div>
@@ -106,27 +123,31 @@ const ServicesDetail = () => {
       </div>
 
       <div className=" bg-light my-5 py-5">
-       {user?.email?
-        <form onSubmit={submitReview}>
-        <label for="exampleInputEmail1" class="form-label">
-          Write Your Review
-        </label>
-        <textarea
-          type="text"
-          name="name"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-        ></textarea>
+        {user?.email ? (
+          <form onSubmit={submitReview}>
+            <label for="exampleInputEmail1" class="form-label">
+              Write Your Review
+            </label>
+            <textarea
+              type="text"
+              name="name"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            ></textarea>
 
-        <button type="submit" className="btn btn-primary mt-3">
-          Submit
-        </button>
-      </form>
-      :
-      <h1>For Add Review Please <Link to={'/login'} className="text-decoration-none" >Log In .. </Link> </h1>
-
-       }
+            <button type="submit" className="btn btn-primary mt-3">
+              Submit
+            </button>
+          </form>
+        ) : (
+          <h1>
+            For Add Review Please{" "}
+            <Link to={"/login"} className="text-decoration-none">
+              Log In ..{" "}
+            </Link>{" "}
+          </h1>
+        )}
       </div>
     </div>
   );

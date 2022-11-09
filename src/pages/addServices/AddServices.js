@@ -19,7 +19,6 @@ const AddServices = () => {
     const rating = form.rating.value;
     const price = form.price.value;
     const detail = form.details.value;
-    const review = form.review.value;
 
     const services = {
       name,
@@ -27,14 +26,13 @@ const AddServices = () => {
       rating,
       price,
       detail,
-      time: new Date().toLocaleTimeString(),
+      time: new Date().toLocaleString(),
       reviews: [
         {
-          review: review,
           email: user.email,
           name: user.displayName,
           photo: user.photoURL,
-          reviewTime: new Date().toLocaleTimeString(),
+          reviewTime: new Date().toLocaleString(),
         },
       ],
     };
@@ -118,17 +116,7 @@ const AddServices = () => {
             required
           />
         </Form.Group>
-        {/* input */}
-        <Form.Group className="mb-3" controlId="formBasicReview">
-          <Form.Label>Review </Form.Label>
-          <Form.Control
-            name="review"
-            type="text"
-            placeholder="Review"
-            required
-          />
-        </Form.Group>
-        {/* input */}
+       
 
         <Button variant="primary" type="submit">
           Submit
