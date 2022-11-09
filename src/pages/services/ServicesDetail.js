@@ -95,7 +95,7 @@ const sortsReview =reviews.sort((a,b)=>new Date(b.reviewTime)-new Date(a.reviewT
             return <div className="col-6 my-2 shadow ">
   
             <div class="card  border border-0">
-                <img className=" mx-auto py-3  rounded-pill" src={review.photo} class="card-img-top" alt="..." style={{'width':'40%'}}/>
+                <img className=" mx-auto py-3 " src={review.photo} class="card-img-top" alt="..." style={{'width':'40%','borderTopLeftRadius':'60%'}}/>
                 <div class="card-body">
                   <p class="card-text fw-bold fs-3 ">{review.review}</p>
                   <h5 class="card-title text-muted">{review.name}</h5>

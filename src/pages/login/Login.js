@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../contexts/AuthProvider";
 import useTitle from "../../myhooks/useTitle";
@@ -12,7 +13,7 @@ const Login = () => {
   const [show, setshow] = useState(false);
   const [error, setError] = useState("");
 
-  const { login, loader, setloader } = useContext(AuthContext);
+  const { login, loader, setloader ,googleSignIn } = useContext(AuthContext);
 
   const handleShow = () => {
     return setshow(!show);
@@ -86,6 +87,18 @@ const Login = () => {
           Submit
         </Button>
       </Form>
+      <p className="my-1 text-muted">
+        Are you a new user . please <Link to={"/signup"}>Sign Up...</Link>
+      </p>
+      <div onClick={googleSignIn } className="btn btn-outline-primary w-100 mt-2 ">
+        <h2 className="text-yellow-800">
+          Sign with <br />{" "}
+          <span className="text-3xl text-yellow-700 font-semibold">
+            {" "}
+            Google
+          </span>{" "}
+        </h2>
+      </div>
     </div>
   );
 };
