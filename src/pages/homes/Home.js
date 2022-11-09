@@ -32,7 +32,7 @@ const [loader,setloader] =useState(true);
         </div>
       )}
       <div className="my-3 mx-auto" style={{ maxWidth: "90%" }}>
-        <h1>Services {services.length}</h1>
+        <h1 hidden={loader||false}>Total  Services {services.length}</h1>
         <div class="card-group row ">
           {services.map((service) => {
             return (
@@ -41,7 +41,7 @@ const [loader,setloader] =useState(true);
           })}
         </div>
 
-        <Link to={"/services"} className="btn btn-primary px-3 py-2">
+        <Link to={"/services"} className="btn btn-primary px-3 py-2" hidden={loader||false} >
           See All{" "}
         </Link>
       </div>

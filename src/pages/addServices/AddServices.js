@@ -6,7 +6,7 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import useTitle from "../../myhooks/useTitle";
 
 const AddServices = () => {
-  useTitle('Add Services')
+  useTitle("Add Service");
   const [loader, setloader] = useState(false);
   const { user } = useContext(AuthContext);
 
@@ -26,13 +26,12 @@ const AddServices = () => {
       rating,
       price,
       detail,
-      time: new Date().toLocaleString(),
+      time: new Date().toLocaleTimeString(),
       reviews: [
         {
           email: user.email,
           name: user.displayName,
           photo: user.photoURL,
-          reviewTime: new Date().toLocaleString(),
         },
       ],
     };
@@ -116,7 +115,9 @@ const AddServices = () => {
             required
           />
         </Form.Group>
-       
+        {/* input */}
+      
+    
 
         <Button variant="primary" type="submit">
           Submit

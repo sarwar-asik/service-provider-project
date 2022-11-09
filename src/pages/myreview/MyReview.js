@@ -21,7 +21,7 @@ const MyReview = () => {
   useTitle("My Reviews"); //// title the page ////
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?email=${user.email}`)
+    fetch(`https://sh-tourist-server.vercel.app/reviews?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setReview(data);
@@ -48,8 +48,8 @@ const MyReview = () => {
 
                 <div className="d-flex justify-content-between align-items-center px-2 py-3">
                   <div className=" w-50 ">
-                    <Button variant="primary" onClick={handleShow}>
-                      Update
+                    <Button className="" variant="primary" onClick={handleShow}  style={{'fontSize':'70%'}}>
+                      Edit Review
                     </Button>
                     <Modal show={show} onHide={handleClose}>
                       <Modal.Header closeButton>
@@ -75,7 +75,11 @@ const MyReview = () => {
                             <Form.Label>Example textarea</Form.Label>
                             <Form.Control as="textarea" rows={3} />
                           </Form.Group>
-                          <Button onClick={handleClose} variant="primary" type="submit">
+                          <Button
+                            onClick={handleClose}
+                            variant="primary"
+                            type="submit"
+                          >
                             Submit
                           </Button>
                         </Form>
@@ -92,7 +96,9 @@ const MyReview = () => {
                   </div>
 
                   <div className="">
-                    <button className="btn btn-outline-danger">Delete</button>
+                    <button className="btn btn-outline-danger" style={{'fontSize':'70%'}}>
+                      Delete Review{" "}
+                    </button>
                   </div>
                 </div>
 

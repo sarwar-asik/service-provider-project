@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Main = () => {
     return (
-        <div>
+        <div className='mx-auto bg-light' style={{'maxWidth':'95%'}}>
             <Headers/>
             <Outlet/>
             <Footer/>
