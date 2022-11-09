@@ -15,7 +15,7 @@ const Headers = () => {
         <Container>
           <Navbar.Brand href="#home" className=" ">
             <Link to={"/"} className="btn fw-bold fs-1 text-muted">
-              SH PERSONAL TRAVEL
+              SH PERSONAL TOUR SERVICE
             </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />

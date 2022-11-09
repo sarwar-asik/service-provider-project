@@ -12,7 +12,7 @@ const ServicesDetail = () => {
 const [reviews,setReviews] = useState([])
 
 useEffect(()=>{
-  fetch(`http://localhost:5000/reviews/${service._id}`)
+  fetch(`https://sh-tourist-server.vercel.app/reviews/${service._id}`)
   .then(res=>res.json())
   .then(data=>{
     setReviews(data)
@@ -38,9 +38,9 @@ const sortsReview =reviews.sort((a,b)=>new Date(b.reviewTime)-new Date(a.reviewT
       reviewTime: new Date().toLocaleString(),
     };
 
-    // /  ///
+    // / post user review   ///
 
-    fetch("http://localhost:5000/addreviews", {
+    fetch("https://sh-tourist-server.vercel.app/addreviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -86,41 +86,33 @@ const sortsReview =reviews.sort((a,b)=>new Date(b.reviewTime)-new Date(a.reviewT
         </div>
       </div>
 
-      <div className="card mx-auto my-3 w-50 shadow">
-        <h1> Total Review </h1>
-        {sortsReview.map((rev) => {
-          return (
-            <div class="card mb-3">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img
-                    className="img-fluid rounded-pill"
-                    src={
-                      rev.photo
-                        ? rev.photo
-                        : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                    }
-                    alt=""
-                  />
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <div class="card-header">{rev.name}</div>
+      
+      <div class="card-group row">
 
-                    <p class="card-text">
-                      <span className="text-muted fw-bold">User review : </span>
-                      <br />
-                      <span className="text-warning  fw-bold fs-5">
-                        {rev.review}
-                      </span>
-                    </p>
-                  </div>
+
+        {
+          sortsReview.map(review=>{
+            return <div className="col-6 my-2 shadow ">
+  
+            <div class="card  border border-0">
+                <img className=" mx-auto py-3  rounded-pill" src={review.photo} class="card-img-top" alt="..." style={{'width':'40%'}}/>
+                <div class="card-body">
+                  <p class="card-text fw-bold fs-3 ">{review.review}</p>
+                  <h5 class="card-title text-muted">{review.name}</h5>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">At {review.reviewTime}</small>
                 </div>
               </div>
             </div>
-          );
-        })}
-      </div>
+          })
+        }
+
+
+
+
+</div>
+
 
       <div className=" bg-light my-5 py-5">
         {user?.email ? (
