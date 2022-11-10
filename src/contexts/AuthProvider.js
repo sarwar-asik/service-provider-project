@@ -46,7 +46,7 @@ const AuthProvider = ({ children }) => {
   const logout = () => {
     return signOut(auth)
       .then(() => {
-        alert("logout");
+        localStorage.removeItem("sh-travel-token");
         toast("log out ");
       })
       .catch((error) => {

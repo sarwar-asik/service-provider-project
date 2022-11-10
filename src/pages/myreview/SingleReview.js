@@ -11,28 +11,32 @@ const SingleReview = () => {
     const rev = form.rev.value;
     const img = form.img.value;
 
-
-    toast("update");
-
-
     fetch(`http://localhost:5000/reviews/${reviews._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({rev,img}),
+      body: JSON.stringify({ rev, img }),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        toast("update");
+
       });
   };
 
   return (
-    <div className="my-5 mx-auto py-3 shadow rounded px-1" style={{'maxWidth':'60%'}}>
-      <h1 className="text-center bg-secondary my-3 py-5 text-light"> Update Your Review  </h1>
+    <div
+      className="my-5 mx-auto py-3 shadow rounded px-1"
+      style={{ maxWidth: "60%" }}
+    >
+      <h1 className="text-center bg-secondary my-3 py-5 text-light">
+        {" "}
+        Update Your Review{" "}
+      </h1>
 
-      <form onSubmit={submitReview} className='px-2'>
+      <form onSubmit={submitReview} className="px-2">
         <label for="exampleInputText" class="form-label">
           Update Image
         </label>
@@ -43,6 +47,7 @@ const SingleReview = () => {
           id="exampleInputText"
           name="img"
           placeholder="paste img url"
+          defaultValue={reviews.photo}
         />
 
         <label for="exampleInputEmail1" class="form-label">

@@ -15,12 +15,6 @@ const AllReview = () => {
       });
   }, []);
 
-  // serviceName: service.name,
-  // review: comment,
-  // email: user.email,
-  // name: user.displayName,
-  // photo: user.photoURL,
-  // reviewTime: new Date().toLocaleString(),
 
   return (
     <div className="my-5 mx-auto w-50">

@@ -5,7 +5,6 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../contexts/AuthProvider";
-import AuthToken from "../../JWT/AuthToken";
 import useTitle from "../../myhooks/useTitle";
 
 const Login = () => {
@@ -38,7 +37,6 @@ const Login = () => {
 
         ///get jwt token ///
 
-
         const currentUser = {
           email: user.email,
         };
@@ -53,22 +51,16 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-
-
             console.log(data);
 
-            
             localStorage.setItem("sh-travel-token", data.token);
           });
 
-
-
-
-          // close jwt
+        // close jwt
       })
       .catch((error) => {
         setError(error.message);
-        setloader(true)
+        setloader(true);
       });
 
     setError("");
@@ -106,9 +98,6 @@ const Login = () => {
           />
         </Form.Group>
 
-        {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check   type="checkbox" label="Check me out" />
-        </Form.Group> */}
         <p className="text-danger ">{error}</p>
         <Button variant="primary" type="submit">
           Submit

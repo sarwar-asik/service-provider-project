@@ -55,7 +55,7 @@ const Home = () => {
 
       {/* all review section */}
 
-      <AllReview></AllReview>
+      {/* <AllReview></AllReview> */}
 
       {/* for ssectio-3 */}
 

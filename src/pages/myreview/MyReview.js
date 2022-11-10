@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 const MyReview = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   const [review, setReview] = useState([]);
 
   //// for modal
@@ -22,8 +22,17 @@ const MyReview = () => {
   useTitle("My Reviews"); //// title the page ////
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?email=${user?.email}`)
-      .then((res) => res.json())
+    fetch(`http://localhost:5000/reviews?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("sh-travel-token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          logout();
+        }
+        return res.json();
+      })
       .then((data) => {
         setReview(data);
       });
@@ -48,15 +57,16 @@ const MyReview = () => {
   return (
     <div className="mx-auto" style={{ maxWidth: "80%" }}>
       <div class="row">
-
-        {review.length === 0 && <h2 className="text-danger text-center mt-3">No reviews were added</h2>}
-
-
+        {review.length === 0 && (
+          <h2 className="text-danger text-center mt-3">
+            No reviews were added or found
+          </h2>
+        )}
 
         {review?.map((rev) => {
           return (
             <div class="col-sm-6 col-md-4 col-lg-4 my-2">
-              <div class="card">
+              <div class="card" style={{ borderTopRightRadius: "20%" }}>
                 <div class="card-body">
                   <p class="card-text">{rev.review}</p>
                   <h5 class="card-title text-muted">{rev.serviceName}</h5>
