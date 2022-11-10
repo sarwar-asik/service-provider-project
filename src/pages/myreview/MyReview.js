@@ -25,7 +25,6 @@ const MyReview = () => {
       .then((res) => res.json())
       .then((data) => {
         setReview(data);
-        
       });
   }, [user?.email]);
 
@@ -34,22 +33,46 @@ const MyReview = () => {
     toast("update");
   };
 
+  const handleDelete = (id) => {
+    const isDelete = window.confirm("Do you want Delete");
+
+    fetch(`http://localhost:5000/reviews/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast("deleted");
+        const remaining = review.filter((rv) => rv._id !== id);
+        setReview(remaining);
+      });
+  };
+
+
+
+  console.log(review);
+
   return (
     <div className="mx-auto" style={{ maxWidth: "80%" }}>
       <h2>total review {review.length}</h2>
       <div class="row">
-        {review.map((rev) => {
+        {review?.map((rev) => {
           return (
             <div class="col-sm-6 col-md-4 col-lg-4 my-2">
               <div class="card">
                 <div class="card-body">
                   <p class="card-text">{rev.review}</p>
                   <h5 class="card-title text-muted">{rev.serviceName}</h5>
+                  <p>Email: {rev.email}</p>
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center px-2 py-3">
                   <div className=" w-50 ">
-                    <Button className="" variant="primary" onClick={handleShow}  style={{'fontSize':'70%'}}>
+                    <Button
+                      className=""
+                      variant="primary"
+                      onClick={handleShow}
+                      style={{ fontSize: "70%" }}
+                    >
                       Edit Review
                     </Button>
                     <Modal show={show} onHide={handleClose}>
@@ -65,6 +88,7 @@ const MyReview = () => {
                             <Form.Label>Email address</Form.Label>
                             <Form.Control
                               type="email"
+                              name
                               placeholder="name@example.com"
                               autoFocus
                             />
@@ -97,7 +121,11 @@ const MyReview = () => {
                   </div>
 
                   <div className="">
-                    <button className="btn btn-outline-danger" style={{'fontSize':'70%'}}>
+                    <button
+                      onClick={() => handleDelete(rev._id)}
+                      className="btn btn-outline-danger"
+                      style={{ fontSize: "70%" }}
+                    >
                       Delete Review{" "}
                     </button>
                   </div>

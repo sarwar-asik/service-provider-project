@@ -23,20 +23,27 @@ const AllReview = () => {
   // reviewTime: new Date().toLocaleString(),
 
   return (
-    <div className="my-5 shadow w-50 mx-auto">
-      <Row xs={1} md={2} className="g-4">
+    <div className="my-5 mx-auto w-50">
+<h2 className="bg-info  py-3 text-muted rounded my-3"> My Service Review </h2>
+      <Row xs={1} md={3} className="g-4">
         {reviews.map((review) => (
-          <Col className="w-50 " style={{ maxHeight: "70%" }}>
-            <div className="">
+          <Col className="py-3 shadow  "  style={{'borderTopRightRadius':'60%'}}>
+            <div className="d-flex gap-1 w-50 ">
               <img
                 className="w-50 h-50 rounded-pill"
                 src={review.photo}
                 alt=""
               />
               <p>
-                <h3> {review.review}</h3>
+                <h5> 
+                {review.review?.length <= 20 ?review.review:review.review.slice(0,20) +'......' }
+                </h5>
               </p>
             </div>
+            <p>
+            {review.name}
+            </p>
+            <p>{review.reviewTime}</p>
           </Col>
         ))}
       </Row>
