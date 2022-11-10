@@ -11,13 +11,18 @@ const ServicesDetail = () => {
 
 const [reviews,setReviews] = useState([])
 
+const [refresh, setRefresh] = useState([])
+
+
+
 useEffect(()=>{
   fetch(`https://sh-tourist-server.vercel.app/reviews/${service._id}`)
   .then(res=>res.json())
   .then(data=>{
     setReviews(data)
+    
   })
-},[])
+},[refresh])
 
 const sortsReview =reviews.sort((a,b)=>new Date(b.reviewTime)-new Date(a.reviewTime))
 
@@ -52,8 +57,7 @@ const sortsReview =reviews.sort((a,b)=>new Date(b.reviewTime)-new Date(a.reviewT
         console.log(data);
         toast('update comment')
         form.reset()
-
-
+        setRefresh(data)
       });
 
 
@@ -101,6 +105,8 @@ const sortsReview =reviews.sort((a,b)=>new Date(b.reviewTime)-new Date(a.reviewT
                   <h5 class="card-title text-muted">{review.name}</h5>
                 </div>
                 <div class="card-footer">
+                  <small>{review.email}</small>
+                  <br />
                   <small class="text-muted">At {review.reviewTime}</small>
                 </div>
               </div>

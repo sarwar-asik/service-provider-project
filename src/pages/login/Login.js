@@ -5,6 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../contexts/AuthProvider";
+import AuthToken from "../../JWT/AuthToken";
 import useTitle from "../../myhooks/useTitle";
 
 const Login = () => {
@@ -13,7 +14,7 @@ const Login = () => {
   const [show, setshow] = useState(false);
   const [error, setError] = useState("");
 
-  const { login, loader, setloader ,googleSignIn } = useContext(AuthContext);
+  const { login, loader, setloader, googleSignIn } = useContext(AuthContext);
 
   const handleShow = () => {
     return setshow(!show);
@@ -25,23 +26,49 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
 
     login(email, password)
-      .then((userCredential) => {
+      .then((result) => {
         // Signed in
-        const user = userCredential.user;
-        toast(user);
+        const user = result.user;
+        toast(user, "log in ");
         setError("");
         form.reset();
-        console.log(user.email);
-        // added a token //
         setloader(false);
+
+        ///get jwt token ///
+
+
+        const currentUser = {
+          email: user.email,
+        };
+        console.log(currentUser);
+
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+
+
+            console.log(data);
+
+            
+            localStorage.setItem("sh-travel-token", data.token);
+          });
+
+
+
+
+          // close jwt
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        setError(errorMessage);
+        setError(error.message);
+        setloader(true)
       });
 
     setError("");
@@ -90,7 +117,10 @@ const Login = () => {
       <p className="my-1 text-muted">
         Are you a new user . please <Link to={"/signup"}>Sign Up...</Link>
       </p>
-      <div onClick={googleSignIn } className="btn btn-outline-primary w-100 mt-2 ">
+      <div
+        onClick={googleSignIn}
+        className="btn btn-outline-primary w-100 mt-2 "
+      >
         <h2 className="text-yellow-800">
           Sign with <br />{" "}
           <span className="text-3xl text-yellow-700 font-semibold">
