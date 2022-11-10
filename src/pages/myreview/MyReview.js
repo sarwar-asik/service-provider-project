@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const MyReview = () => {
   const { user } = useContext(AuthContext);
@@ -28,11 +29,6 @@ const MyReview = () => {
       });
   }, [user?.email]);
 
-  const handleUpdate = (event) => {
-    event.preventDefault();
-    toast("update");
-  };
-
   const handleDelete = (id) => {
     const isDelete = window.confirm("Do you want Delete");
 
@@ -47,14 +43,16 @@ const MyReview = () => {
       });
   };
 
-
-
   console.log(review);
 
   return (
     <div className="mx-auto" style={{ maxWidth: "80%" }}>
-      <h2>total review {review.length}</h2>
       <div class="row">
+
+        {review.length === 0 && <h2 className="text-danger text-center mt-3">No reviews were added</h2>}
+
+
+
         {review?.map((rev) => {
           return (
             <div class="col-sm-6 col-md-4 col-lg-4 my-2">
@@ -63,63 +61,20 @@ const MyReview = () => {
                   <p class="card-text">{rev.review}</p>
                   <h5 class="card-title text-muted">{rev.serviceName}</h5>
                   <p>Email: {rev.email}</p>
+                  <img className="w-25 rounded" src={rev.photo} alt="" />
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center px-2 py-3">
-                  <div className=" w-50 ">
-                    <Button
-                      className=""
-                      variant="primary"
-                      onClick={handleShow}
-                      style={{ fontSize: "70%" }}
-                    >
-                      Edit Review
-                    </Button>
-                    <Modal show={show} onHide={handleClose}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>Modal heading</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <Form onSubmit={handleUpdate}>
-                          <Form.Group
-                            className="mb-3"
-                            controlId="exampleForm.ControlInput1"
-                          >
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control
-                              type="email"
-                              name
-                              placeholder="name@example.com"
-                              autoFocus
-                            />
-                          </Form.Group>
-                          <Form.Group
-                            className="mb-3"
-                            controlId="exampleForm.ControlTextarea1"
-                          >
-                            <Form.Label>Example textarea</Form.Label>
-                            <Form.Control as="textarea" rows={3} />
-                          </Form.Group>
-                          <Button
-                            onClick={handleClose}
-                            variant="primary"
-                            type="submit"
-                          >
-                            Submit
-                          </Button>
-                        </Form>
-                      </Modal.Body>
-                      <Modal.Footer>
-                        {/* <Button variant="secondary" onClick={handleClose}>
-                          Close
-                        </Button> */}
-                        <Button variant="primary" onClick={handleClose}>
-                          Update Change
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
-                  </div>
+                  {/* update */}
 
+                  <Link
+                    to={`/review/${rev._id}`}
+                    className="btn btn-outline-info"
+                  >
+                    Update
+                  </Link>
+
+                  {/* delete review */}
                   <div className="">
                     <button
                       onClick={() => handleDelete(rev._id)}
