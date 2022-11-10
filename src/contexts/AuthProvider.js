@@ -62,6 +62,26 @@ const AuthProvider = ({ children }) => {
         const user = result.user;
         console.log(user);
         toast("Google sign in");
+
+        // VERIFY JWT ///
+        const currentUser = {
+          email: user.email,
+        };
+        console.log(currentUser);
+
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+
+            localStorage.setItem("sh-travel-token", data.token);
+          });
       })
       .catch((error) => {
         console.log(error);

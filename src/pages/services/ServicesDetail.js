@@ -9,11 +9,11 @@ const ServicesDetail = () => {
   const service = useLoaderData();
   const { user } = useContext(AuthContext);
 
-const [reviews,setReviews] = useState([])
-
-const [refresh, setRefresh] = useState([])
-
-
+  
+  const [refresh, setRefresh] = useState([])
+  
+  
+  const [reviews,setReviews] = useState([])
 
 useEffect(()=>{
   fetch(`https://sh-tourist-server.vercel.app/reviews/${service._id}`)

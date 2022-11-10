@@ -4,8 +4,8 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import useTitle from "../../myhooks/useTitle";
 import ServiceCard from "../services/ServiceCard";
 import Services from "../services/Services";
-import AllReview from "./AllReview";
 import Section3 from "./AllServices";
+import MyExtra from "./MyExtra";
 import Sliders from "./Sliders";
 
 const Home = () => {
@@ -23,9 +23,10 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="bg-light mx-auto text-center" style={{ maxWidth: "90%" }}>
+    <div className="bg-light mx-auto text-center">
       <Sliders></Sliders>
 
+      <MyExtra></MyExtra>
       {/* for services */}
       {loader && (
         <div class="text-center">
@@ -52,12 +53,6 @@ const Home = () => {
           See All{" "}
         </Link>
       </div>
-
-      {/* all review section */}
-
-      {/* <AllReview></AllReview> */}
-
-      {/* for ssectio-3 */}
 
       <Section3></Section3>
     </div>

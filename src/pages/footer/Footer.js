@@ -7,7 +7,7 @@ const Footer = () => {
 
     
   return (
-    <div className="row  bg-secondary py-5  text-light">
+    <div className="row  bg-secondary py-5 mx-auto text-light">
 
       <div className="col-sm-6 col-6 col-md-4 col-lg-4 mx-auto">
         <h1 className="text-warning">PERSONAL TOUR SERVICE  </h1>
