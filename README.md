@@ -1,7 +1,7 @@
 #SH TRVEL SERVICE
 
 ## LIVE SERVER LINK (https://sh-travel-service.web.app/)
-## SERVER SITE LINK (https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-sarwar-asik)
+## SERVER SITE LINK (https://github.com/sarwar-asik/service-provider-server)
 
 
 #MY ACTIVITIES :
